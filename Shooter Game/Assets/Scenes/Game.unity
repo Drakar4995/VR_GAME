@@ -2952,7 +2952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demonRed: {fileID: 1975194375736644, guid: a9a4eb3d7953948a2b5cf46607f686bc, type: 3}
-  demonRedInterval: 3.5
+  demonBlue: {fileID: 1111084942782338, guid: 90a8ab4210df340b789303fd97c2d458, type: 3}
+  demonInterval: 3.5
   spawnPositions: []
 --- !u!4 &1620606924
 Transform:
@@ -3244,6 +3245,10 @@ PrefabInstance:
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201935306763396522, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+      propertyPath: m_Mass
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
