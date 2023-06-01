@@ -1101,7 +1101,7 @@ GameObject:
   - component: {fileID: 3704603717089836557}
   m_Layer: 0
   m_Name: Boximon Fiery
-  m_TagString: Untagged
+  m_TagString: Red_Demon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1166,7 +1166,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1, z: 1}
+  m_Size: {x: 1, y: 1.2, z: 1}
   m_Center: {x: 0.05, y: 0.6, z: 0.05}
 --- !u!114 &-3988302901234883076
 MonoBehaviour:
@@ -1193,12 +1193,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 0.4
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.56, z: 0}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1 &1992369794795074
 GameObject:
   m_ObjectHideFlags: 0

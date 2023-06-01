@@ -11,7 +11,7 @@ public class DemonController : MonoBehaviour
 
     private Vector3 moveDirection = Vector3.zero;
     private bool shouldMove = false; // Variable para indicar si debe moverse o no
-
+    private bool previousShouldMoveState = false; // Estado anterior de shouldMove
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,9 +21,17 @@ public class DemonController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(shouldMove);
+        Debug.Log(previousShouldMoveState);
         if (shouldMove)
         {
             MoveForward();
+        }
+        else if (shouldMove != previousShouldMoveState)
+        {
+            // El estado de shouldMove ha cambiado, restaurar la animación y el estado anterior
+            animator.SetBool("isRunning", previousShouldMoveState);
+            previousShouldMoveState = shouldMove;
         }
     }
 
@@ -32,6 +40,7 @@ public class DemonController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         animator.SetBool("isRunning", true);
         shouldMove = true; // Se habilita el movimiento después del retraso
+        previousShouldMoveState = shouldMove;
     }
 
     void MoveForward()
@@ -47,12 +56,6 @@ public class DemonController : MonoBehaviour
             shouldMove = false;
             animator.SetBool("collisionChicken", true);
             StartCoroutine(ResetCollisionAnimation());
-            Debug.Log("Colisión detectada entre Chicken y Demon. Contador: ");
-        }
-        if (collision.gameObject.CompareTag("Red_Demon"))
-        {
-            shouldMove = false;
-            animator.SetBool("isRunning", false);
         }
 
         if (collision.gameObject.CompareTag("Bullet"))
@@ -60,6 +63,11 @@ public class DemonController : MonoBehaviour
             animator.SetBool("isDead", true);
             Destroy(collision.gameObject, 3f); // Destruir el prefab de la bala después de 3 segundos
             Destroy(gameObject, 3f); // Destruir el prefab del demon después de 3 segundos
+        }
+        if (collision.gameObject.CompareTag("Red_Demon"))
+        {
+            shouldMove = false;
+            animator.SetBool("isRunning", false);
         }
     }
 
