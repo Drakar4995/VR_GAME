@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478492}
   - component: {fileID: 9575568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet762_LOD0(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 408250}
   - component: {fileID: 3354606}
   - component: {fileID: 2345454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 450672}
   - component: {fileID: 3383382}
   - component: {fileID: 2369308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444574}
   - component: {fileID: 9584352}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet762_LowPoly(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 483076}
   - component: {fileID: 3365306}
   - component: {fileID: 2330400}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shell_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 480438}
   - component: {fileID: 3310394}
   - component: {fileID: 2375664}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 313844168390622196}
   - component: {fileID: 4198858097619365021}
   - component: {fileID: 726969450094109153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet-7.62 (Copper) LP
   m_TagString: Bullet
   m_Icon: {fileID: 0}
