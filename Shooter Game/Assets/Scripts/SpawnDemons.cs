@@ -8,7 +8,10 @@ public class SpawnDemons : MonoBehaviour
     private GameObject demonRed;
 
     [SerializeField]
-    private float demonRedInterval = 3.5f;
+    private GameObject demonBlue;
+
+    [SerializeField]
+    private float demonInterval = 3.5f;
 
     [SerializeField]
     private Vector3[] spawnPositions;
@@ -21,31 +24,50 @@ public class SpawnDemons : MonoBehaviour
         spawnPositions = new Vector3[]
         {
             new Vector3(20.65914f, 0.18f, -2),
-            new Vector3(20.65914f, 0.18f, 0f),// -izquierda +derecha
+            new Vector3(20.65914f, 0.18f, 0f),
             new Vector3(20.65914f, 0.18f, 2f)
         };
 
-        StartCoroutine(SpawnEnemy(demonRedInterval, demonRed));
+        StartCoroutine(SpawnEnemy(demonInterval));
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator SpawnEnemy(float interval)
     {
+        while (true)
+        {
+            yield return new WaitForSeconds(interval);
 
+            int randomIndex = Random.Range(0, spawnPositions.Length); // Generar un índice aleatorio
+
+            GameObject demonPrefab = GetRandomDemonPrefab(); // Obtener el prefab de demonio aleatorio
+
+            Vector3 spawnPosition = spawnPositions[randomIndex];
+            Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
+
+            GameObject newEnemy = Instantiate(demonPrefab, spawnPosition, spawnRotation, this.gameObject.transform);
+
+            /*
+            currentSpawnIndex++;
+
+            if (currentSpawnIndex >= spawnPositions.Length)
+            {
+                currentSpawnIndex = 0;
+            }*/
+        }
     }
 
-    private IEnumerator SpawnEnemy(float interval, GameObject demon)
+    private GameObject GetRandomDemonPrefab()
     {
-        yield return new WaitForSeconds(interval);
+        // Generar un número aleatorio para determinar qué demonio instanciar
+        int randomValue = Random.Range(0, 2);
 
-        int randomIndex = Random.Range(0, spawnPositions.Length); // Generar un índice aleatorio
-
-        Vector3 spawnPosition = spawnPositions[randomIndex];
-
-        Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
-
-        GameObject newEnemy = Instantiate(demon, spawnPosition, spawnRotation, this.gameObject.transform);
-
-        StartCoroutine(SpawnEnemy(interval, newEnemy));
+        if (randomValue == 0)
+        {
+            return demonRed; // Retorna el prefab de demonRed si el número aleatorio es 0
+        }
+        else
+        {
+            return demonBlue; // Retorna el prefab de demonBlue si el número aleatorio es 1
+        }
     }
 }
