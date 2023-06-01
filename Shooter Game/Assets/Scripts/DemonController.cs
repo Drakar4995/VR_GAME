@@ -60,8 +60,9 @@ public class DemonController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            animator.SetBool("isDead", true);
-            Destroy(collision.gameObject, 3f); // Destruir el prefab de la bala después de 3 segundos
+            //animator.SetBool("isDead", true);
+            shouldMove = false;
+            CancelAndPlayAnimation("Die");
             Destroy(gameObject, 3f); // Destruir el prefab del demon después de 3 segundos
         }
         if (collision.gameObject.CompareTag("Red_Demon"))
@@ -77,5 +78,10 @@ public class DemonController : MonoBehaviour
         {
             yield return null;
         }
+    }
+    void CancelAndPlayAnimation(string animationName)
+    {
+        animator.StopPlayback(); // Detener la reproducción de la animación actual
+        animator.Play(animationName); // Reproducir la nueva animación directamente
     }
 }

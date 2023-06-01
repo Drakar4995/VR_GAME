@@ -20,9 +20,9 @@ public class SpawnDemons : MonoBehaviour
     {
         spawnPositions = new Vector3[]
         {
-            new Vector3(20.65914f, 0.18f, 0.13f),
-            new Vector3(20.65914f, 0.18f, -1.625f),
-            new Vector3(20.65914f, 0.18f, 2.15f)
+            new Vector3(20.65914f, 0.18f, -2),
+            new Vector3(20.65914f, 0.18f, 0f),// -izquierda +derecha
+            new Vector3(20.65914f, 0.18f, 2f)
         };
 
         StartCoroutine(SpawnEnemy(demonRedInterval, demonRed));
