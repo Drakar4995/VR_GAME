@@ -29,7 +29,7 @@ public class DemonController : MonoBehaviour
 
     IEnumerator StartWithDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         animator.SetBool("isRunning", true);
         shouldMove = true; // Se habilita el movimiento después del retraso
     }
