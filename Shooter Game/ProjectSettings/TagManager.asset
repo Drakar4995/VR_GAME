@@ -11,10 +11,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Demons
+  - Bullet
   - Water
   - UI
-  - Bullet
+  - Demons
   - 
   - 
   - 
