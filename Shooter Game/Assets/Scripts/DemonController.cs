@@ -8,6 +8,7 @@ public class DemonController : MonoBehaviour
     CharacterController controller;
 
     public float speed = 5f;
+    public TextScript textScript;
 
     private Vector3 moveDirection = Vector3.zero;
     private bool shouldMove = false; 
@@ -51,8 +52,10 @@ public class DemonController : MonoBehaviour
         {
             shouldMove = false;
             CancelAndPlayAnimation("Die");
-            Destroy(gameObject, 1.5f); 
-            isDestroyed = true; 
+            //this.textScript.AddScore(1);
+            isDestroyed = true;
+            Destroy(gameObject, 1f); 
+
         }
 
         if (collision.gameObject.CompareTag("Chicken"))
