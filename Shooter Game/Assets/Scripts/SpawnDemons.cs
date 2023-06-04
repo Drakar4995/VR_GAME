@@ -37,8 +37,7 @@ public class SpawnDemons : MonoBehaviour
         {
             yield return new WaitForSeconds(interval);
 
-            int randomIndex = Random.Range(0, spawnPositions.Length); 
-            randomIndex = 1;
+            int randomIndex = Random.Range(0, spawnPositions.Length);
             GameObject demonPrefab = GetRandomDemonPrefab(); 
 
             Vector3 spawnPosition = spawnPositions[randomIndex];
