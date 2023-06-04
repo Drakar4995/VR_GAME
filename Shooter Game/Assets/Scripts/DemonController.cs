@@ -8,12 +8,13 @@ public class DemonController : MonoBehaviour
     CharacterController controller;
 
     public float speed = 5f;
+    public TextScript textScript;
 
     private Vector3 moveDirection = Vector3.zero;
-    private bool shouldMove = false; // Variable para indicar si debe moverse o no
-    private bool previousShouldMoveState = false; // Estado anterior de shouldMove
+    private bool shouldMove = false; 
+    private bool previousShouldMoveState = false; 
 
-    private bool isDestroyed = false; // Variable para indicar si el demonio ha sido destruido
+    private bool isDestroyed = false;  
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class DemonController : MonoBehaviour
 
     void Update()
     {
-        if (shouldMove && !isDestroyed) // Verificar si el demonio debe moverse y no ha sido destruido
+        if (shouldMove && !isDestroyed)  
         {
             MoveForward();
         }
@@ -34,32 +35,34 @@ public class DemonController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         animator.SetBool("isRunning", true);
-        shouldMove = true; // Se habilita el movimiento después del retraso
+        shouldMove = true; 
         previousShouldMoveState = shouldMove;
     }
 
     void MoveForward()
     {
-        transform.rotation = Quaternion.Euler(0f, -90f, 0f); // Aplicar rotación de -90 grados en el eje y
+        transform.rotation = Quaternion.Euler(0f, -90f, 0f); 
         moveDirection = transform.forward * speed;
         controller.Move(moveDirection * Time.deltaTime);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            shouldMove = false;
+            CancelAndPlayAnimation("Die");
+            //this.textScript.AddScore(1);
+            isDestroyed = true;
+            Destroy(gameObject, 1f); 
+
+        }
+
         if (collision.gameObject.CompareTag("Chicken"))
         {
             shouldMove = false;
             animator.SetBool("collisionChicken", true);
             StartCoroutine(ResetCollisionAnimation());
-        }
-
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            shouldMove = false;
-            CancelAndPlayAnimation("Die");
-            Destroy(gameObject, 3f); // Destruir el prefab del demon después de 3 segundos
-            isDestroyed = true; // Marcar el demonio como destruido
         }
 
         if (collision.gameObject.CompareTag("Red_Demon"))
@@ -71,14 +74,14 @@ public class DemonController : MonoBehaviour
 
     private IEnumerator ResetCollisionAnimation()
     {
-        while (animator != null && animator.GetBool("collisionChicken")) // Verificar si el animator sigue existiendo y la animación se está reproduciendo
+        while (animator != null && animator.GetBool("collisionChicken")) 
         {
             yield return null;
         }
 
         if (animator == null)
         {
-            // El demonio ha sido destruido, detener la rutina de animación de colisión
+  
             yield break;
         }
 
@@ -89,11 +92,11 @@ public class DemonController : MonoBehaviour
     {
         if (animator == null)
         {
-            // El demonio ha sido destruido, no es necesario reproducir la animación
+            
             return;
         }
 
-        animator.StopPlayback(); // Detener la reproducción de la animación actual
-        animator.Play(animationName); // Reproducir la nueva animación directamente
+        animator.StopPlayback(); 
+        animator.Play(animationName); 
     }
 }

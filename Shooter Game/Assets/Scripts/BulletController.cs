@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float destructionDelay = 1f; // Retraso en segundos antes de destruir el objeto
+    public float destructionDelay = 1f; 
 
     private void OnCollisionEnter(Collision collision)
     {
-        Invoke("DestroyObject", destructionDelay); // Llamar a la función DestroyObject después del retraso especificado
+        Invoke("DestroyObject", destructionDelay); 
     }
 
     private void DestroyObject()
     {
-        Destroy(gameObject); // Destruir el objeto que tiene este script
+        Destroy(gameObject); 
     }
 }

@@ -4,51 +4,51 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public GameObject bulletPrefab; // Prefab de la bala
-    public Camera playerCamera; // Referencia a la cámara del jugador
-    public float bulletSpeed = 10f; // Velocidad de la bala
-    public float shootDelay = 1f; // Retraso entre disparos
+    public GameObject bulletPrefab; 
+    public Camera playerCamera; 
+    public float bulletSpeed = 10f; 
+    public float shootDelay = 1f; 
 
-    private float lastShootTime; // Tiempo del último disparo
+    private float lastShootTime; 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0) // Detectar el evento de disparo en pantalla táctil
+        if (Input.touchCount > 0) 
         {
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-                if (Time.time >= lastShootTime + shootDelay) // Verificar si ha pasado suficiente tiempo desde el último disparo
+                if (Time.time >= lastShootTime + shootDelay) 
                 {
-                    Shoot(); // Llamar a la función de disparo
-                    lastShootTime = Time.time; // Actualizar el tiempo del último disparo
+                    Shoot(); 
+                    lastShootTime = Time.time; 
                 }
             }
         }
-        else if (Input.GetMouseButtonDown(0)) // Detectar el evento de disparo con clic izquierdo
+        else if (Input.GetMouseButtonDown(0)) 
         {
-            if (Time.time >= lastShootTime + shootDelay) // Verificar si ha pasado suficiente tiempo desde el último disparo
+            if (Time.time >= lastShootTime + shootDelay) 
             {
-                Shoot(); // Llamar a la función de disparo
-                lastShootTime = Time.time; // Actualizar el tiempo del último disparo
+                Shoot(); 
+                lastShootTime = Time.time; 
             }
         }
     }
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, playerCamera.transform.position, Quaternion.identity); // Instanciar la bala en la posición de la cámara con rotación predeterminada
-        Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>(); // Obtener el componente Rigidbody de la bala
+        GameObject bullet = Instantiate(bulletPrefab, playerCamera.transform.position, Quaternion.identity); 
+        Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
         if (bulletRigidbody != null)
         {
-            bulletRigidbody.velocity = playerCamera.transform.TransformDirection(Vector3.forward) * bulletSpeed; // Aplicar velocidad a la bala en la dirección hacia la cual apunta la cámara
+            bulletRigidbody.velocity = playerCamera.transform.TransformDirection(Vector3.forward) * bulletSpeed; 
         }
 
-        // Hacer que la bala sea un hijo del objeto que contiene el script
+        
         bullet.transform.parent = transform;
 
-        Destroy(bullet, 2f); // Destruir la bala después de 2 segundos
+        Destroy(bullet, 2f); 
     }
 }

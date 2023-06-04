@@ -37,37 +37,30 @@ public class SpawnDemons : MonoBehaviour
         {
             yield return new WaitForSeconds(interval);
 
-            int randomIndex = Random.Range(0, spawnPositions.Length); // Generar un índice aleatorio
-
-            GameObject demonPrefab = GetRandomDemonPrefab(); // Obtener el prefab de demonio aleatorio
+            int randomIndex = Random.Range(0, spawnPositions.Length); 
+            randomIndex = 1;
+            GameObject demonPrefab = GetRandomDemonPrefab(); 
 
             Vector3 spawnPosition = spawnPositions[randomIndex];
             Quaternion spawnRotation = Quaternion.Euler(0f, -90f, 0f);
 
             GameObject newEnemy = Instantiate(demonPrefab, spawnPosition, spawnRotation, this.gameObject.transform);
 
-            /*
-            currentSpawnIndex++;
-
-            if (currentSpawnIndex >= spawnPositions.Length)
-            {
-                currentSpawnIndex = 0;
-            }*/
         }
     }
 
     private GameObject GetRandomDemonPrefab()
     {
-        // Generar un número aleatorio para determinar qué demonio instanciar
+        
         int randomValue = Random.Range(0, 2);
 
         if (randomValue == 0)
         {
-            return demonRed; // Retorna el prefab de demonRed si el número aleatorio es 0
+            return demonRed; 
         }
         else
         {
-            return demonBlue; // Retorna el prefab de demonBlue si el número aleatorio es 1
+            return demonBlue; 
         }
     }
 }
