@@ -19,6 +19,16 @@ public class ChickenAnimationController : MonoBehaviour
 
     }
 
+    /*
+    private void OncollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Red_Demon"))
+        { 
+            Debug.Log(collision.collider.gameObject.name);
+            Destroy(gameObject, 3f);
+        }
+    }*/
+
     IEnumerator StartAnimation()
     {
         while (true)

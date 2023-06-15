@@ -25,7 +25,7 @@ public class DemonController : MonoBehaviour
 
     void Update()
     {
-        if (shouldMove && !isDestroyed)  
+        if (shouldMove)  
         {
             MoveForward();
         }
@@ -48,13 +48,14 @@ public class DemonController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
+       
         if (collision.gameObject.CompareTag("Bullet"))
         {
             shouldMove = false;
             CancelAndPlayAnimation("Die");
             //this.textScript.AddScore(1);
-            isDestroyed = true;
             Destroy(gameObject, 1f); 
+            TextScript.textScript.AddScore(1);
 
         }
 
@@ -62,6 +63,7 @@ public class DemonController : MonoBehaviour
         {
             shouldMove = false;
             animator.SetBool("collisionChicken", true);
+            Destroy(collision.gameObject, 3f);
             StartCoroutine(ResetCollisionAnimation());
         }
 
@@ -71,6 +73,13 @@ public class DemonController : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        shouldMove = true;
+        animator.SetBool("isRunning", true);
+    }
+
 
     private IEnumerator ResetCollisionAnimation()
     {
