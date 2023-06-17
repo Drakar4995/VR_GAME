@@ -6,7 +6,6 @@ public class DemonController : MonoBehaviour
 {
     Animator animator;
     CharacterController controller;
-
     public float speed = 5f;
     //public TextScript textScript;
 
@@ -65,6 +64,7 @@ public class DemonController : MonoBehaviour
             animator.SetBool("collisionChicken", true);
             Destroy(collision.gameObject, 3f);
             //StartCoroutine(AddLifesAfterDelay(3f));
+            AudioChicken.audioChicken.PlayAudio();
             StartCoroutine(ResetCollisionAnimation());
         }
 

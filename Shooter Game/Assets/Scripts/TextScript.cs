@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class TextScript : MonoBehaviour
 {
     public static TextScript textScript;
+    public AudioSource audio;
     public Text ScoreText;
     public int score = 0;
     public int lifes = 3;
@@ -52,6 +53,7 @@ public class TextScript : MonoBehaviour
 
         if (GameObject.FindWithTag("Chicken") == null && !check)
         {
+            audio.Stop();
             GameManager.Instance.intValueToPass = score;
             SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
             check = true;
