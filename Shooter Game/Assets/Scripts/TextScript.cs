@@ -1,17 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TextScript : MonoBehaviour
 {
     public static TextScript textScript;
     public Text ScoreText;
     public int score = 0;
+    public int lifes = 3;
+
+    private bool check = false;
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         textScript = this;
+    }
+    void Start()
+    {
         score = 0;
         UpdateScore();
     }
@@ -20,6 +26,7 @@ public class TextScript : MonoBehaviour
     void Update()
     {
         UpdateScore();
+        checkChickensAlive();
     }
 
     public void AddScore(int newscore)
@@ -30,5 +37,24 @@ public class TextScript : MonoBehaviour
     public void UpdateScore()
     {
         ScoreText.text = "Score: " + score;
+    }
+
+    public void AddLifes(int newlife)
+    {
+        if (lifes > 0)
+        {
+        lifes += newlife;
+        }
+    }
+
+    public void checkChickensAlive()
+    {
+
+        if (GameObject.FindWithTag("Chicken") == null && !check)
+        {
+            GameManager.Instance.intValueToPass = score;
+            SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
+            check = true;
+        }
     }
 }
