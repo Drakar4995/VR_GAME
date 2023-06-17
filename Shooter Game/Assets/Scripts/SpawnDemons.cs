@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpawnDemons : MonoBehaviour
 {
+
+    public static SpawnDemons spawnDemons;
+
     [SerializeField]
     private GameObject demonRed;
 
@@ -21,6 +24,8 @@ public class SpawnDemons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnDemons = this;
+
         spawnPositions = new Vector3[]
         {
             new Vector3(20.65914f, 0.18f, -2),
