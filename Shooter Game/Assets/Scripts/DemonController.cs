@@ -52,7 +52,6 @@ public class DemonController : MonoBehaviour
         {
             shouldMove = false;
             CancelAndPlayAnimation("Die");
-            //this.textScript.AddScore(1);
             TextScript.textScript.AddScore(1);
             Destroy(gameObject, 1f); 
 
@@ -63,7 +62,6 @@ public class DemonController : MonoBehaviour
             shouldMove = false;
             animator.SetBool("collisionChicken", true);
             Destroy(collision.gameObject, 3f);
-            //StartCoroutine(AddLifesAfterDelay(3f));
             AudioChicken.audioChicken.PlayAudio();
             StartCoroutine(ResetCollisionAnimation());
         }
@@ -96,7 +94,6 @@ public class DemonController : MonoBehaviour
         }
 
         animator.SetBool("collisionChicken", false);
-        TextScript.textScript.AddLifes(-1);
     }
 
     void CancelAndPlayAnimation(string animationName)

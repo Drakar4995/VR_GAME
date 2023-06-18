@@ -3363,8 +3363,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InactiveMaterial: {fileID: 2100000, guid: 8d1c7e13ab74c4228b13b8988455141d, type: 2}
   GazedAtMaterial: {fileID: 2100000, guid: 334cf610061dc432ca3cf3b479eb46aa, type: 2}
-  newPosition: {x: 0, y: 0, z: 0}
-  newRotation: {x: 0, y: 0, z: 0}
 --- !u!1001 &196390115
 PrefabInstance:
   m_ObjectHideFlags: 0

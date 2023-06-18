@@ -8,7 +8,6 @@ public class TextScript : MonoBehaviour
     public AudioSource audio;
     public Text ScoreText;
     public int score = 0;
-    public int lifes = 3;
 
     private bool check = false;
     // Start is called before the first frame update
@@ -38,14 +37,6 @@ public class TextScript : MonoBehaviour
     public void UpdateScore()
     {
         ScoreText.text = "Score: " + score;
-    }
-
-    public void AddLifes(int newlife)
-    {
-        if (lifes > 0)
-        {
-        lifes += newlife;
-        }
     }
 
     public void checkChickensAlive()

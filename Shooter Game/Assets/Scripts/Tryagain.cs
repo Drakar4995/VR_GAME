@@ -17,8 +17,6 @@ public class Tryagain : MonoBehaviour
     /// </summary>
     public Material GazedAtMaterial;
     private Renderer _myRenderer;
-    public Vector3 newPosition;
-    public Vector3 newRotation;
 
     /// <summary>
     /// Start is called before the first frame update.

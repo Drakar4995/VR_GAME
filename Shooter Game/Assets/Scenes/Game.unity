@@ -6350,7 +6350,6 @@ MonoBehaviour:
   audio: {fileID: 393414576}
   ScoreText: {fileID: 380663859}
   score: 0
-  lifes: 3
 --- !u!82 &393414576
 AudioSource:
   m_ObjectHideFlags: 0
