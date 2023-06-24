@@ -81,38 +81,12 @@ public class DemonController : MonoBehaviour
 
             }
         }
-        /*
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            int scoreToAdd = 0;
-            int demonLifes = 0;
-            Destroy(collision.gameObject);
-            if (this.name.Contains("Fiery"))
-            {
-                demonLifes = --redDemonLifes;
-                scoreToAdd = 1;
-            }
-            else
-            {
-                demonLifes = --blueDemonLifes;
-                scoreToAdd = 2;
-            }
-
-            if (demonLifes <= 0)
-            {
-                hitted = true;
-                shouldMove = false;
-                CancelAndPlayAnimation("Die");
-                TextScript.textScript.AddScore(scoreToAdd);
-                Destroy(gameObject, 1f);
-            }
-
-        }*/
 
         if (collision.gameObject.CompareTag("Chicken"))
         {
             shouldMove = false;
             animator.SetBool("collisionChicken", true);
+            SpawnDemons.spawnDemons.UpdateSpawnPosition(collision.gameObject.name);
             Destroy(collision.gameObject, 3f);
             AudioChicken.audioChicken.PlayAudio();
             StartCoroutine(ResetCollisionAnimation());
