@@ -49,6 +49,6 @@ public class Gun : MonoBehaviour
         
         bullet.transform.parent = transform;
 
-        Destroy(bullet, 2f); 
+        //Destroy(bullet, 2f); 
     }
 }

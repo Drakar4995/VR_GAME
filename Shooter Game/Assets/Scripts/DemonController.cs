@@ -9,11 +9,14 @@ public class DemonController : MonoBehaviour
     public float speed = 5f;
     //public TextScript textScript;
 
+    private int redDemonLifes = 1;
+    private int blueDemonLifes = 2;
+    private int hitsBlueDemon = 0;
     private Vector3 moveDirection = Vector3.zero;
     private bool shouldMove = false; 
-    private bool previousShouldMoveState = false; 
-
-    private bool isDestroyed = false;  
+    private bool previousShouldMoveState = false;
+    private List<GameObject> collidedBullets = new List<GameObject>();
+    private bool hitted = false;  
 
     void Start()
     {
@@ -47,15 +50,64 @@ public class DemonController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
-       
+
+        if(this.name.Contains("Fiery"))
+        {
+            if (collision.gameObject.CompareTag("Bullet") && !hitted)
+            {
+                Destroy(collision.gameObject);
+                hitted = true;
+                shouldMove = false;
+                CancelAndPlayAnimation("Die");
+                TextScript.textScript.AddScore(1);
+                Destroy(gameObject, 1f);
+            }
+        }
+        else
+        {
+            if (collision.gameObject.CompareTag("Bullet") && hitsBlueDemon<=2 && !collidedBullets.Contains(collision.gameObject))
+            {
+                collidedBullets.Add(collision.gameObject);
+                Destroy(collision.gameObject);
+                hitsBlueDemon++;
+                if(hitsBlueDemon == 2)
+                {
+                    hitted = true;
+                    shouldMove = false;
+                    CancelAndPlayAnimation("Die");
+                    TextScript.textScript.AddScore(2);
+                    Destroy(gameObject, 1f);
+                }
+
+            }
+        }
+        /*
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            shouldMove = false;
-            CancelAndPlayAnimation("Die");
-            TextScript.textScript.AddScore(1);
-            Destroy(gameObject, 1f); 
+            int scoreToAdd = 0;
+            int demonLifes = 0;
+            Destroy(collision.gameObject);
+            if (this.name.Contains("Fiery"))
+            {
+                demonLifes = --redDemonLifes;
+                scoreToAdd = 1;
+            }
+            else
+            {
+                demonLifes = --blueDemonLifes;
+                scoreToAdd = 2;
+            }
 
-        }
+            if (demonLifes <= 0)
+            {
+                hitted = true;
+                shouldMove = false;
+                CancelAndPlayAnimation("Die");
+                TextScript.textScript.AddScore(scoreToAdd);
+                Destroy(gameObject, 1f);
+            }
+
+        }*/
 
         if (collision.gameObject.CompareTag("Chicken"))
         {
