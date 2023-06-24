@@ -9,6 +9,7 @@ public class DemonController : MonoBehaviour
     public float speed = 5f;
     //public TextScript textScript;
 
+    private float elapedTime = 0f;
     private int redDemonLifes = 1;
     private int blueDemonLifes = 2;
     private int hitsBlueDemon = 0;
@@ -22,7 +23,9 @@ public class DemonController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        StartCoroutine(StartWithDelay());
+        animator.SetBool("isRunning", true);
+        shouldMove = true;
+        previousShouldMoveState = shouldMove;
     }
 
     void Update()
@@ -30,12 +33,21 @@ public class DemonController : MonoBehaviour
         if (shouldMove)  
         {
             MoveForward();
+            
+        }
+        else
+        {
+            elapedTime += Time.deltaTime;
+            if (elapedTime >= 1.5f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     IEnumerator StartWithDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0f);
         animator.SetBool("isRunning", true);
         shouldMove = true; 
         previousShouldMoveState = shouldMove;
