@@ -7,7 +7,6 @@ public class DemonController : MonoBehaviour
     Animator animator;
     CharacterController controller;
     public float speed = 5f;
-    //public TextScript textScript;
 
     private float elapedTime = 0f;
     private int redDemonLifes = 1;
@@ -84,7 +83,6 @@ public class DemonController : MonoBehaviour
                 hitsBlueDemon++;
                 if(hitsBlueDemon == 2)
                 {
-                    hitted = true;
                     shouldMove = false;
                     CancelAndPlayAnimation("Die");
                     TextScript.textScript.AddScore(2);

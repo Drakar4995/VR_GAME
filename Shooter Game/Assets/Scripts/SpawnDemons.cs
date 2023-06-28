@@ -27,7 +27,7 @@ public class SpawnDemons : MonoBehaviour
     private float demonBlueProbability = 0f;
     private float demonBlueIncrement = 0.05f;
     private float maxDemonBlueProbability = 1f;
-    private float timeToMaxProbability = 120f; // 2 minutos
+    private float timeToMaxProbability = 120f; //2 MINUTES
 
     // Start is called before the first frame update
     void Start()
