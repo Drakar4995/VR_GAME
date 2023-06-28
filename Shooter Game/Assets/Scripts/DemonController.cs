@@ -7,19 +7,24 @@ public class DemonController : MonoBehaviour
     Animator animator;
     CharacterController controller;
     public float speed = 5f;
-    //public TextScript textScript;
 
+    private float elapedTime = 0f;
+    private int redDemonLifes = 1;
+    private int blueDemonLifes = 2;
+    private int hitsBlueDemon = 0;
     private Vector3 moveDirection = Vector3.zero;
     private bool shouldMove = false; 
-    private bool previousShouldMoveState = false; 
-
-    private bool isDestroyed = false;  
+    private bool previousShouldMoveState = false;
+    private List<GameObject> collidedBullets = new List<GameObject>();
+    private bool hitted = false;  
 
     void Start()
     {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        StartCoroutine(StartWithDelay());
+        animator.SetBool("isRunning", true);
+        shouldMove = true;
+        previousShouldMoveState = shouldMove;
     }
 
     void Update()
@@ -27,12 +32,21 @@ public class DemonController : MonoBehaviour
         if (shouldMove)  
         {
             MoveForward();
+            
+        }
+        else
+        {
+            elapedTime += Time.deltaTime;
+            if (elapedTime >= 1.5f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     IEnumerator StartWithDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0f);
         animator.SetBool("isRunning", true);
         shouldMove = true; 
         previousShouldMoveState = shouldMove;
@@ -47,23 +61,43 @@ public class DemonController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
-       
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            shouldMove = false;
-            CancelAndPlayAnimation("Die");
-            //this.textScript.AddScore(1);
-            TextScript.textScript.AddScore(1);
-            Destroy(gameObject, 1f); 
 
+        if(this.name.Contains("Fiery"))
+        {
+            if (collision.gameObject.CompareTag("Bullet") && !hitted)
+            {
+                Destroy(collision.gameObject);
+                hitted = true;
+                shouldMove = false;
+                CancelAndPlayAnimation("Die");
+                TextScript.textScript.AddScore(1);
+                Destroy(gameObject, 1f);
+            }
+        }
+        else
+        {
+            if (collision.gameObject.CompareTag("Bullet") && hitsBlueDemon<=2 && !collidedBullets.Contains(collision.gameObject))
+            {
+                collidedBullets.Add(collision.gameObject);
+                Destroy(collision.gameObject);
+                hitsBlueDemon++;
+                if(hitsBlueDemon == 2)
+                {
+                    shouldMove = false;
+                    CancelAndPlayAnimation("Die");
+                    TextScript.textScript.AddScore(2);
+                    Destroy(gameObject, 1f);
+                }
+
+            }
         }
 
         if (collision.gameObject.CompareTag("Chicken"))
         {
             shouldMove = false;
             animator.SetBool("collisionChicken", true);
+            SpawnDemons.spawnDemons.UpdateSpawnPosition(collision.gameObject.name);
             Destroy(collision.gameObject, 3f);
-            //StartCoroutine(AddLifesAfterDelay(3f));
             AudioChicken.audioChicken.PlayAudio();
             StartCoroutine(ResetCollisionAnimation());
         }
@@ -96,7 +130,6 @@ public class DemonController : MonoBehaviour
         }
 
         animator.SetBool("collisionChicken", false);
-        TextScript.textScript.AddLifes(-1);
     }
 
     void CancelAndPlayAnimation(string animationName)

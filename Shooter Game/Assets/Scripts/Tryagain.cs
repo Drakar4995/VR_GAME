@@ -17,8 +17,6 @@ public class Tryagain : MonoBehaviour
     /// </summary>
     public Material GazedAtMaterial;
     private Renderer _myRenderer;
-    public Vector3 newPosition;
-    public Vector3 newRotation;
 
     /// <summary>
     /// Start is called before the first frame update.
@@ -51,16 +49,7 @@ public class Tryagain : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
-        RestartGame();
-    }
-    private void OnControllerColliderHit(ControllerColliderHit collision)
-    {
-
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            RestartGame();
-
-        }
+        StartGame();
     }
 
     /// <summary>
@@ -77,7 +66,7 @@ public class Tryagain : MonoBehaviour
             _myRenderer.material = gazedAt ? GazedAtMaterial : InactiveMaterial;
         }
     }
-    private void RestartGame()
+    private void StartGame()
     {
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }

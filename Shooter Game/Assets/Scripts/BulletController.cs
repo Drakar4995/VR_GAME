@@ -6,11 +6,6 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Invoke("DestroyObject", destructionDelay); 
-    }
-
-    private void DestroyObject()
-    {
-        Destroy(gameObject); 
+     //   Destroy(this.gameObject);
     }
 }

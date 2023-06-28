@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 public class TextScript : MonoBehaviour
 {
     public static TextScript textScript;
+    public Text pointstoShowText;
     public AudioSource audio;
     public Text ScoreText;
     public int score = 0;
-    public int lifes = 3;
+    private int pointsToShow;
 
     private bool check = false;
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class TextScript : MonoBehaviour
     void Start()
     {
         score = 0;
+        pointstoShowText.text = "";
         UpdateScore();
     }
 
@@ -30,22 +32,25 @@ public class TextScript : MonoBehaviour
         checkChickensAlive();
     }
 
+    public void PointsToShow(int points)
+    {
+        pointstoShowText.text = "+" + points;
+        Invoke("ResetPoints",0.5f);
+    }
+
+    void ResetPoints()
+    {
+        pointstoShowText.text = "";
+    }
     public void AddScore(int newscore)
     {
         score += newscore;
+        PointsToShow(newscore);
     }
 
     public void UpdateScore()
     {
         ScoreText.text = "Score: " + score;
-    }
-
-    public void AddLifes(int newlife)
-    {
-        if (lifes > 0)
-        {
-        lifes += newlife;
-        }
     }
 
     public void checkChickensAlive()
